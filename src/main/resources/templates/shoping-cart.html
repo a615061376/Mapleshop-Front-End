@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="/img/logo.png">
+    <title>我的購物車</title>
+
+    <th:block th:include="common.html :: css_source"></th:block>
+</head>
+
+<body>
+<th:block th:include="common.html :: preloder"></th:block>
+<th:block th:include="common.html :: humberger"></th:block>
+<th:block th:include="common.html :: header"></th:block>
+
+    <section class="hero hero-normal">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="hero__categories">
+                    <div class="hero__categories__all">
+                        <i class="fa fa-bars"></i>
+                        <span>全部商品分類</span>
+                    </div>
+                    <ul>
+                        <li th:each="levelOne:${list}"><a th:href="'/spGoods/list/0/'+${levelOne.catId}" th:text="${levelOne.catName}"></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="hero__search">
+                    <div class="hero__search__form">
+                        <form action="/spGoods/search" method="post">
+                            <div class="hero__search__categories">
+                                所 有 種 類
+                                <span class="arrow_carrot-down"></span>
+                            </div>
+                            <input type="text" name="keyWord" placeholder="請輸入關鍵字">
+                            <button type="submit" class="site-btn">搜 尋</button>
+                        </form>
+                    </div>
+                    <div class="hero__search__phone">
+                        <div class="hero__search__phone__icon">
+                            <i class="fas fa-phone-alt" ></i>
+                        </div>
+                        <div class="hero__search__phone__text">
+                            <h5>0928 - 044 - 276</h5>
+                            <span>10 : 00 am ~ 20 : 00 pm</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="/img/breadcrumb.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h3>我的購物車</h3>
+                        <div class="breadcrumb__option">
+                            <span>My shopping-cart</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Shoping Cart Section Begin -->
+    <section class="shoping-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__table">
+                        <table id="cart">
+                            <thead>
+                                <tr>
+                                    <th class="shoping__product">商品名稱</th>
+                                    <th>商品價格</th>
+                                    <th>購買數量</th>
+                                    <th>小計</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="cart:${cartList}">
+                                    <td class="shoping__cart__item">
+                                        <img th:src="'/img/product/'+${cart.fileName}" alt="">
+                                        <h5 th:text="${cart.goodsName}"></h5>
+                                    </td>
+                                    <td class="shoping__cart__price" th:text="'NT$ '+${cart.goodsPrice}">
+                                    </td>
+                                    <td class="shoping__cart__quantity">
+                                        <div class="quantity">
+                                            <div class="pro-qty">
+                                                <input type="hidden" class="goodsPrice" th:value="${cart.goodsPrice}"/>
+                                                <input type="hidden" class="goodsNumber" th:value="${cart.goodsNumber}"/>
+                                                <span class="qtybtn car_btn_1" onclick="subQuantity(this)">-</span>
+                                                <input type="text" class="car_ipt" th:value="${cart.quantity}"/>
+                                                <span class="qtybtn car_btn_2" onclick="addQuantity(this)">+</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <input type="hidden" class="id" th:value="${cart.id}" />
+                                    <td class="shoping__cart__total" th:text="'NT$ '+${cart.cost}">
+                                    </td>
+                                    <td class="shoping__cart__item__close">
+                                        <span class="icon_close delete" onclick="removeCart(this)"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__btns">
+                        <a href="/" class="primary-btn cart-btn">繼續購物</a>
+                        <a href="/spCart/get" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
+                            更新購物車訊息</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="shoping__continue">
+                        <div class="shoping__discount">
+                            <h5>折扣碼</h5>
+                            <form action="#">
+                                <input type="text" placeholder="在此輸入折扣碼">
+                                <button type="submit" class="site-btn">使用折扣碼</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="shoping__checkout">
+                        <h5>購物資訊</h5>
+                        <ul>
+                            <li>商品總計 <span id="cartPrice"></span></li>
+                            <li>折扣碼 <span class="discount">- NT$ 0.00</span></li>
+                            <li>價格總計 <span id="totalprice"></span></li>
+                        </ul>
+                        <a href="/spCart/checkout" class="primary-btn" onclick="setCost()">提交訂單</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shoping Cart Section End -->
+
+<th:block th:include="common.html :: footer"></th:block>
+<th:block th:include="common.html :: js_source"></th:block>
+
+<script type="text/javascript">
+    //商品數量++
+    function addQuantity(obj){
+        let index = $(".car_btn_2").index(obj);
+        let quantity = parseInt($(".car_ipt").eq(index).val());
+        let number = parseInt($(".goodsNumber").eq(index).val());
+        if(quantity == number){
+            alert("商品庫存不足！");
+            return false;
+        }
+        quantity++;
+        let price = parseFloat($(".goodsPrice").eq(index).val());
+        let cost = quantity * price;
+        let id = parseInt($(".id").eq(index).val());
+        $.ajax({
+            url:"/spCart/update/"+id+"/"+quantity+"/"+cost,
+            type:"POST",
+            success:function (data) {
+                if(data == "success"){
+                    $(".shoping__cart__total").eq(index).text('NT$ '+cost);
+                    $(".car_ipt").eq(index).val(quantity);
+
+                    let array = $(".shoping__cart__total");
+                    let totalCost = 0;
+                    for(let i = 0;i < array.length;i++) {
+                        let val = parseFloat($(".shoping__cart__total").eq(i).html().substring(4));
+                        totalCost += val;
+                    }
+                    let discount = parseFloat($(".discount").text().substring(6));
+                    let finalCost = totalCost - discount;
+                    $("#cartPrice").html('NT$ '+totalCost);
+                    $("#totalprice").html("NT$ "+finalCost);
+                }
+            }
+        });
+    }
+
+    //商品數量--
+    function subQuantity(obj){
+        let index = $(".car_btn_1").index(obj);
+        let quantity = parseInt($(".car_ipt").eq(index).val());
+        if(quantity == 1){
+            alert("商品數量至少超過一件！");
+            return false;
+        }
+        quantity--;
+        let price = parseFloat($(".goodsPrice").eq(index).val());
+        let cost = quantity * price
+        let id = parseInt($(".id").eq(index).val());
+        $.ajax({
+            url:"/spCart/update/"+id+"/"+quantity+"/"+cost,
+            type:"POST",
+            success:function (data) {
+                if(data == "success"){
+                    $(".shoping__cart__total").eq(index).text('NT$ '+cost);
+                    $(".car_ipt").eq(index).val(quantity);
+
+                    let array = $(".shoping__cart__total");
+                    let totalCost = 0;
+                    for(let i = 0;i < array.length;i++){
+                        let val = parseFloat($(".shoping__cart__total").eq(i).html().substring(4));
+                        totalCost += val;
+                    }
+                    let discount = parseFloat($(".discount").text().substring(6));
+                    let finalCost = totalCost - discount;
+                    $("#cartPrice").html("NT$ "+totalCost);
+                    $("#totalprice").html("NT$ "+finalCost);
+                }
+            }
+        });
+    }
+
+    //刪除事件
+    function removeCart(obj){
+        let index = $(".delete").index(obj);
+        let id = parseInt($(".id").eq(index).val());
+        if(confirm("是否確定删除?")){
+            window.location.href = "/spCart/delete/"+id;
+        }
+    }
+
+    function setCost(){
+        var cost = document.getElementById("totalprice").innerText;
+        window.localStorage.setItem("finalprice", cost);
+    }
+
+
+</script>
+<script type="text/javascript">
+    $(function(){
+        let array = $(".shoping__cart__total");
+        let totalCost = 0;
+        for(let i = 0;i < array.length;i++){
+            let val = parseFloat($(".shoping__cart__total").eq(i).html().substring(4));
+            totalCost += val;
+        }
+        let discount = parseFloat($(".discount").text().substring(6));
+        let finalCost = totalCost - discount;
+        $("#cartPrice").html("NT$ "+totalCost);
+        $("#totalprice").html("NT$ "+finalCost);
+    });
+</script>
+</body>
+
+</html>

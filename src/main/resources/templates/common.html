@@ -1,0 +1,340 @@
+<html lang="zh-TW" xmlns:th="http://thymeleaf.org">
+<meta charset="UTF-8">
+<link rel="icon" href="/img/logo.png">
+<title>楓糖小舖-Thymeleaf外框模板</title>
+
+<div th:fragment="css_source">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+  <!-- Css Styles -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/all.min.css">
+  <link rel="stylesheet" href="/css/elegant-icons.css" type="text/css">
+  <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
+  <link rel="stylesheet" href="/css/jquery-ui.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</div>
+
+<!-- Page Preloder -->
+<div th:fragment="preloder">
+  <div id="preloder">
+    <div class="loader"></div>
+  </div>
+</div>
+
+<!-- Humberger Begin -->
+<div th:fragment="humberger">
+  <div class="humberger__menu__overlay"></div>
+  <div class="humberger__menu__wrapper">
+    <div class="humberger__menu__logo">
+      <a href="#"><img src="/img/logobanner.png" alt=""></a>
+    </div>
+    <div class="humberger__menu__cart">
+      <ul>
+        <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+        <li><a href="#"><i class="fa fa-shopping-cart"></i> <span>3</span></a></li>
+      </ul>
+      <div class="header__cart__price">項目金額 : <span>150</span> 元</div>
+    </div>
+    <div class="humberger__menu__widget">
+      <div class="header__top__right__language">
+        <img src="../../img/language.png" alt="">
+        <div>繁體中文</div>
+        <span class="arrow_carrot-down"></span>
+        <ul>
+          <li><a href="#">繁體中文</a></li>
+          <li><a href="#">簡體中文</a></li>
+          <li><a href="#">English</a></li>
+        </ul>
+      </div>
+      <div class="header__top__right__auth">
+        <a href="#"><i class="fa fa-user"></i> 登入 / 註冊</a>
+      </div>
+    </div>
+    <nav class="humberger__menu__nav mobile-menu">
+      <ul>
+        <li class="active"><a href="index.html">首頁</a></li>
+        <li><a href="shop-grid.html">商城</a></li>
+        <li><a href="#">我的購物資訊</a>
+          <ul class="header__menu__dropdown">
+            <li><a href="shop-details.html">商品詳情</a></li>
+            <li><a href="shoping-cart.html">我的購物車</a></li>
+            <li><a href="checkout.html">交易資訊</a></li>
+            <li><a href="blog-details.html">部落格詳情</a></li>
+          </ul>
+        </li>
+        <li><a href="blog.html">部落格</a></li>
+        <li><a href="contact.html">聯繫我們</a></li>
+      </ul>
+    </nav>
+    <div id="mobile-menu-wrap"></div>
+    <div class="header__top__right__social">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+      <a href="#"><i class="fab fa-line"></i></a>
+    </div>
+    <div class="humberger__menu__contact">
+      <ul>
+        <li><i class="fas fa-phone-alt"></i><span>0928-044-276</span></li>
+        <li><i class="fa fa-envelope"></i><span>a615061376@gmail.com</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- Humberger End -->
+
+<!-- Header Section Begin -->
+<div th:fragment="header">
+  <header class="header">
+    <div class="header__top">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-6">
+            <div class="header__top__left">
+              <ul>
+                <li><i class="fas fa-phone-alt"></i>客服專線 ： <span>0928-044-276</span></li>
+                <li><i class="fa fa-envelope"></i>客服信箱 ： <span>fengtangxiaopu@gmail.com</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <div class="header__top__right">
+              <div class="header__top__right__social">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-line"></i></a>
+              </div>
+              <div class="header__top__right__language">
+                <img src="/img/language.png" alt="">
+                <div>繁體中文</div>
+                <span class="arrow_carrot-down"></span>
+                <ul>
+                  <li><a href="#">繁體中文</a></li>
+                  <li><a href="#">簡體中文</a></li>
+                  <li><a href="#">English</a></li>
+                </ul>
+              </div>
+              <div class="header__top__right__auth">
+                <a href="/login" th:if="${session.spUser == null}"><i class="fa fa-user"></i> 登入 / 註冊</a>
+                <a href="/setting" th:if="${session.spUser != null}" th:text="'歡迎回來，'+${session.spUser.username}"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="header__logo">
+            <a href="/spCategory/index"><img src="/img/logobanner.png" alt=""></a>
+          </div>
+        </div>
+        <div class="col-lg-5 offset-lg-1">
+          <nav class="header__menu">
+            <ul>
+              <li class="active"><a href="/">首頁</a></li>
+              <li><a>商城</a>
+                <ul class="header__menu__dropdown">
+                  <li th:each="levelOne:${list}"><a th:href="'/spGoods/list/0/'+${levelOne.catId}" th:text="${levelOne.catName}"></a></li>
+                </ul>
+              </li>
+              <li><a href="/spCart/get">購物車</a></li>
+              <li><a>部落格</a>
+                <ul class="header__menu__dropdown">
+                  <li><a href="/blog">部落格主頁</a></li>
+                  <li><a href="/blog-details">部落格詳情</a></li>
+                </ul>
+              </li>
+              <li><a>個人主頁</a>
+                <ul class="header__menu__dropdown">
+                  <li><a href="/spUser/personal">個人資訊</a></li>
+                  <li><a href="/spUser/address">收貨地址管理</a></li>
+                  <li><a href="/spUser/orderList">我的訂單</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-lg-3">
+          <div class="header__cart">
+            <ul>
+              <li><a href="#"><i class="fa fa-heart"></i> <span >0</span></a></li>
+              <li class="shopping-cart">
+                <a href="#"><i class="fa fa-shopping-cart"></i> <span th:text="${cartList.size()}"></span></a>
+                  <div class="cart_hover">
+                    <div class="un_login"><b>我的購物車</b></div>
+                    <ul class="cars">
+                      <li th:each="cart:${cartList}">
+                        <div class="img"><a><img th:src="'/img/product/'+${cart.fileName}"/></a></div>
+                        <div class="name"><a th:text="${cart.goodsName}"></a></div>
+                        <div class="price"><font color="#ff4e00" th:text="'NT$'+${cart.goodsPrice}"></font> X <span class="quantity" th:text="${cart.quantity}"></span>  =  <span class="cost" th:text="${cart.cost}"></span></div>
+                      </li>
+                    </ul>
+                    <div class="price_a" th:if="${session.spUser == null}"><a href="/login">請先登入</a></div>
+                    <div class="price_a" th:if="${cartList.size() == 0 && session.spUser != null}"><a href="/">快去購物吧</a></div>
+                    <div class="price_a" th:if="${cartList.size() != 0 && session.spUser != null}"><a href="/spCart/get">去結算</a></div>
+                  </div>
+              </li>
+            </ul>
+            <div class="header__cart__price">項目金額 : <span id="total"></span> 元</div>
+          </div>
+        </div>
+      </div>
+      <div class="humberger__open">
+        <i class="fa fa-bars"></i>
+      </div>
+    </div>
+  </header>
+</div>
+<!-- Header Section End -->
+
+<div th:fragment="hero">
+  <section class="hero" >
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="hero__categories">
+            <div class="hero__categories__all">
+              <i class="fa fa-bars"></i>
+              <span>全部商品分類</span>
+            </div>
+            <ul>
+              <li th:each="levelOne:${list}"><a th:href="'/spGoods/list/0/'+${levelOne.catId}" th:text="${levelOne.catName}"></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-9">
+          <div class="hero__search">
+            <div class="hero__search__form">
+              <form action="/spGoods/search" method="post">
+                <div class="hero__search__categories">
+                  所 有 種 類
+                  <span class="arrow_carrot-down"></span>
+                </div>
+                <input type="text" name="keyWord" placeholder="請輸入關鍵字">
+                <button type="submit" class="primary-btn">搜 尋</button>
+              </form>
+            </div>
+            <div class="hero__search__phone">
+              <div class="hero__search__phone__icon">
+                <i class="fas fa-phone-alt" ></i>
+              </div>
+              <div class="hero__search__phone__text">
+                <h5>0928 - 044 - 276</h5>
+                <span>10 : 00 am ~ 20 : 00 pm</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- Footer Section Begin -->
+
+
+<div th:fragment="footer">
+  <footer class="footer spad">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="footer__about">
+            <div class="footer__about__logo">
+              <a href="/"><img src="/img/logobanner.png" alt=""></a>
+            </div>
+            <ul>
+              <li>總店地址 : 台北市OO路</li>
+              <li>客服電話 : 0928044276</li>
+              <li>Email : fengtangxiaopu@gmail.com</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+          <div class="footer__widget">
+            <h6>關於小舖</h6>
+            <ul>
+              <li><a href="#">限時特賣</a></li>
+              <li><a href="#">付款方式</a></li>
+              <li><a href="#">楓糖罐</a></li>
+              <li><a href="#">運費抵免</a></li>
+              <li><a href="#">退款退貨</a></li>
+              <li><a href="#">客服中心</a></li>
+            </ul>
+            <ul>
+              <li><a href="#">小舖資訊</a></li>
+              <li><a href="#">賣家中心</a></li>
+              <li><a href="#">加入我們</a></li>
+              <li><a href="#">交易契約</a></li>
+              <li><a href="#">隱私政策</a></li>
+              <li><a href="#">社群媒體</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+          <div class="footer__widget">
+            <h6>加入我們的及時通訊</h6>
+            <p>可以獲取有關我們最新的產品及特別優惠的郵件提醒。</p>
+            <form action="#">
+              <input type="text" placeholder="請輸入您的 Email">
+              <button type="submit" class="site-btn">訂閱</button>
+            </form>
+            <div class="footer__widget__social">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-line"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="footer__copyright">
+            <div class="footer__copyright__text">
+              <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made reference to the Colorlib. For display only, no profit-making.
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+            </div>
+            <div class="footer__copyright__payment"><img src="../../img/payment-item.png" alt=""></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+<!-- Footer Section End -->
+
+<div th:fragment="js_source">
+  <!-- Js Plugins -->
+  <script type="text/javascript" src="/js/jquery-3.3.1.min.js" ></script>
+  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.nice-select.min.js"></script>
+  <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.slicknav.js"></script>
+  <script type="text/javascript" src="/js/mixitup.min.js"></script>
+  <script type="text/javascript" src="/js/owl.carousel.min.js"></script>
+  <script type="text/javascript" src="/js/main.js"></script>
+
+  <script type="text/javascript">
+    $(function(){
+      var array = $(".cost");
+      var total = 0;
+      for (var i =0; i<array.length; i++){
+        var val = parseInt($(".cost").eq(i).html());
+        total += val;
+      }
+      $("#total").html(total);
+    })
+  </script>
+</div>
+
+</html>

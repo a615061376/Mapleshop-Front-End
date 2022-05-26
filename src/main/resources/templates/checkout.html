@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="/img/logo.png">
+    <title>楓糖小舖-確認訂單</title>
+
+    <th:block th:include="common.html :: css_source"></th:block>
+</head>
+
+<body>
+<th:block th:include="common.html :: preloder"></th:block>
+<th:block th:include="common.html :: humberger"></th:block>
+<th:block th:include="common.html :: header"></th:block>
+
+    <!-- Hero Section Begin -->
+    <section class="hero hero-normal">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="hero__categories">
+                        <div class="hero__categories__all">
+                            <i class="fa fa-bars"></i>
+                            <span>全部商品分類</span>
+                        </div>
+                        <ul>
+                            <li th:each="levelOne:${list}"><a th:href="'/spGoods/list/0/'+${levelOne.catId}" th:text="${levelOne.catName}"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="/spGoods/search" method="post">
+                                <div class="hero__search__categories">
+                                    所 有 種 類
+                                    <span class="arrow_carrot-down"></span>
+                                </div>
+                                <input type="text" name="keyWord" placeholder="請輸入關鍵字">
+                                <button type="submit" class="site-btn">搜 尋</button>
+                            </form>
+                        </div>
+                        <div class="hero__search__phone">
+                            <div class="hero__search__phone__icon">
+                                <i class="fas fa-phone-alt" ></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>0928 - 044 - 276</h5>
+                                <span>10 : 00 am ~ 20 : 00 pm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="/img/breadcrumb.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h3>確認訂單</h3>
+                        <div class="breadcrumb__option">
+                            <span>Checkout your order</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Checkout Section Begin -->
+    <section class="checkout spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h6><span class="icon_tag_alt"></span> 有折價券嗎？ <a href="#"> 點擊此處</a> 查看您的折價券</h6>
+                </div>
+            </div>
+            <div class="checkout__form">
+                <h4>訂單詳情</h4>
+                <form action="/spConsignee/input" method="POST" id="cgnform">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="checkout__input">
+                                        <p>收貨人姓名<span>*</span></p>
+                                        <input type="text" name="cgnName" th:value="${session.spUser.username}" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout__input">
+                                <p>地區/縣市郵遞區號<span>*</span></p>
+                                <input type="text" name="cgnCode" required>
+                            </div>
+                            <div class="checkout__input">
+                                <p>詳細地址<span>*</span></p>
+                                <input type="text" class="checkout__input__add" name="cgnAddress" required>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>收貨人手機號<span>*</span></p>
+                                        <input type="number" name="cgnTel" th:value="${session.spUser.getUserTel}" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Email</p>
+                                        <input type="email" name="cgnEmail" th:value="${session.spUser.getUserEmail}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout__input col-lg-12">
+                                <p>其他需求</p>
+                                <input type="text" placeholder="請告訴我們其他的需求，我們盡可能的滿足您。" name="other">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="checkout__order">
+                                <h4>您的訂單</h4>
+                                <div class="checkout__order__products">商品名稱</div>
+                                    <ul th:each="cart:${cartList}">
+                                        <li th:text="${cart.goodsName}"></li>
+                                    </ul>
+                                    <div class="checkout__order__subtotal">商品總類 <span th:text="${cartList.size()}"></span></div>
+                                    <div class="checkout__order__total">價格總計 <span id="finalprice"></span></div>
+                                <div class="checkout__input__checkbox">
+                                    <label for="payment">
+                                        信用卡支付
+                                        <input type="checkbox" id="payment">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="checkout__input__checkbox">
+                                    <label for="paypal">
+                                        現金支付
+                                        <input type="checkbox" id="paypal">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <button type="submit" class="site-btn">提交訂單</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Checkout Section End -->
+
+<th:block th:include="common.html :: footer"></th:block>
+<th:block th:include="common.html :: js_source"></th:block>
+<script type="text/javascript">
+    document.getElementById("finalprice").innerHTML = localStorage.getItem("finalprice");
+</script>
+</body>
+
+</html>

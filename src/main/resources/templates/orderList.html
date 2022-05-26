@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="/img/logo.png">
+    <title>楓糖小舖-個人主頁</title>
+
+    <th:block th:include="common.html :: css_source"></th:block>
+</head>
+
+<body>
+
+<th:block th:include="common.html :: preloder"></th:block>
+<th:block th:include="common.html :: humberger"></th:block>
+<th:block th:include="common.html :: header"></th:block>
+
+    <section class="hero hero-normal">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="hero__categories">
+                        <div class="hero__categories__all">
+                            <i class="fa fa-bars"></i>
+                            <span>全部商品分類</span>
+                        </div>
+                        <ul>
+                            <li th:each="levelOne:${list}"><a th:href="'/spGoods/list/0/'+${levelOne.catId}" th:text="${levelOne.catName}"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="/spGoods/search" method="post">
+                                <div class="hero__search__categories">
+                                    所 有 種 類
+                                    <span class="arrow_carrot-down"></span>
+                                </div>
+                                <input type="text" name="keyWord" placeholder="請輸入關鍵字">
+                                <button type="submit" class="site-btn">搜 尋</button>
+                            </form>
+                        </div>
+                        <div class="hero__search__phone">
+                            <div class="hero__search__phone__icon">
+                                <i class="fas fa-phone-alt" ></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>0928 - 044 - 276</h5>
+                                <span>10 : 00 am ~ 20 : 00 pm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="/img/breadcrumb.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h3>個人主頁</h3>
+                        <div class="breadcrumb__option">
+                           <span>personal setting</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-5">
+                    <div class="sidebar">
+                        <div class="sidebar__item" >
+                            <h4>會員中心</h4>
+                            <ul>
+                                <li><a href="/spUser/personal">個人資訊</a></li>
+                                <li><a href="/spUser/address">收貨地址管理</a></li>
+                                <li><a href="#">部落格貼文(未開發)</a></li>
+                            </ul>
+                        </div>
+                        <div class="sidebar__item">
+                        <h4>訂單中心</h4>
+                        <ul>
+                            <li><a href="/spUser/orderList">我的訂單</a></li>
+                        </ul>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-7">
+                    <div class="row" th:each="order:${spOrderList}" >
+                        <table class="table table-bordered ">
+                            <tr class="table-warning">
+                                <td th:text="'訂單號：'+${order.orderNumber}" width="45%"></td>
+                                <td th:text="'欲送達地址：'+${order.cgnAddress}" width="40%"></td>
+                                <td th:text="'總價：'+${order.orderPrice}" width="15%"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <table class="table table-bordered" style="text-align: center">
+                                        <thead class="table-secondary">
+                                            <tr>
+                                                <td width="50%"><b>商品名稱</b></td>
+                                                <td width="13%"><b>商品圖片</b></td>
+                                                <td width="13%"><b>購買數量</b></td>
+                                                <td width="12%"><b>單價</b></td>
+                                                <td width="12%"><b>總價</b></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="orderGoods:${order.getSpOrderGoodsList()}">
+                                                <td th:text="${orderGoods.goodsName}"></td>
+                                                <td><img th:src="'/img/product/'+${orderGoods.fileName}" style="width: 50px; height: 50px"></td>
+                                                <td th:text="${orderGoods.goodsNumber}"></td>
+                                                <td th:text="${orderGoods.goodsPrice}"></td>
+                                                <td th:text="${orderGoods.goodsTotalPrice}"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<th:block th:include="common.html :: footer"></th:block>
+<th:block th:include="common.html :: js_source"></th:block>
+
+</body>
+
+</html>
