@@ -8,14 +8,6 @@ import tw.com.mapleshop.vo.SpConsigneeVO;
 
 import java.util.List;
 
-/**
- * <p>
- * 收貨人表 服务类
- * </p>
- *
- * @author JHuang
- * @since 2022-01-24
- */
 public interface SpConsigneeService extends IService<SpConsignee> {
 
     public SpConsignee input(SpConsigneeForm spConsigneeForm, SpUser spUser);

@@ -8,14 +8,6 @@ import tw.com.mapleshop.vo.SpCartVO;
 
 import java.util.List;
 
-/**
- * <p>
- *  服务类
- * </p>
- *
- * @author JHuang
- * @since 2022-02-20
- */
 public interface SpCartService extends IService<SpCart> {
 
     public Boolean add(SpCart spCart);

@@ -7,32 +7,21 @@ import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-/**
- * <p>
- * 
- * </p>
- *
- * @author JHuang
- * @since 2022-01-24
- */
 @Data
-  @EqualsAndHashCode(callSuper = false)
-    public class SpReport1 implements Serializable {
+@EqualsAndHashCode(callSuper = false)
+public class SpReport1 implements Serializable {
 
     private static final long serialVersionUID=1L;
 
-      @TableId(value = "id", type = IdType.AUTO)
-      private Integer id;
+    // 主鍵id
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
-      /**
-     * 用戶數
-     */
-      private Integer rp1UserCount;
+    // 用戶數
+    private Integer rp1UserCount;
 
-      /**
-     * 地區
-     */
-      private String rp1Area;
+    // 地區
+    private String rp1Area;
 
     private LocalDate rp1Date;
 

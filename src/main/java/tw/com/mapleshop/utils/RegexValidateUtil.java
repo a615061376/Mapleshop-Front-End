@@ -21,7 +21,6 @@ public class RegexValidateUtil {
         return flag;
     }
 
-
     public static boolean checkEmail(String email) {
         String regex = "^[_a-z0-9A-Z]+([.][_a-z0-9A-Z]+)*@[a-z0-9A-Z]+([.][a-z0-9A-Z]+)*$";
         return check(email, regex);

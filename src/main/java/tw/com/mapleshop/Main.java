@@ -13,6 +13,7 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import java.util.ArrayList;
 import java.util.List;
 
+// use to automatically generate structure by mybatisPlus
 public class Main {
     public static void main(String[] args) {
         AutoGenerator autoGenerator = new AutoGenerator();

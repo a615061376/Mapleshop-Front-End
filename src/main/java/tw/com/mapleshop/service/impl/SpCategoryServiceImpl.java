@@ -16,14 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * <p>
- *  服务实现类
- * </p>
- *
- * @author JHuang
- * @since 2022-01-24
- */
 @Service
 public class SpCategoryServiceImpl extends ServiceImpl<SpCategoryMapper, SpCategory> implements SpCategoryService {
 

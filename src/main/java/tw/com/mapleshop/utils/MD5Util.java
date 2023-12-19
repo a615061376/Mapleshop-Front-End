@@ -1,25 +1,13 @@
 package tw.com.mapleshop.utils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
 /**
- * MD5 文字和文件加密工具
+ * MD5文字和文件加密工具
  */
 public class MD5Util {
-    /**
-     * byte[]字节数组 转换成 十六进制字符串
-     *
-     * @param arr 要转换的byte[]字节数组
-     *
-     * @return  String 返回十六进制字符串
-     */
+
     private static String hex(byte[] arr) {
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < arr.length; ++i) {
@@ -28,14 +16,6 @@ public class MD5Util {
         return sb.toString();
     }
 
-
-    /**
-     * MD5加密,并把结果由字节数组转换成十六进制字符串
-     *
-     * @param str 要加密的内容
-     *
-     * @return String 返回加密后的十六进制字符串
-     */
     private static String md5Hex(String str) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
@@ -43,21 +23,12 @@ public class MD5Util {
             return hex(digest);
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println(e.toString());
+            System.out.println(e);
             return "";
         }
     }
 
-
-    /**
-     * 生成含有随机盐的密码
-     *
-     * @param password 要加密的密码
-     *
-     * @return String 含有随机盐的密码
-     */
     public static String getSaltMD5(String password) {
-        // 生成一个16位的随机数
         Random random = new Random();
         StringBuilder sBuilder = new StringBuilder(16);
         sBuilder.append(random.nextInt(99999999)).append(random.nextInt(99999999));
@@ -80,15 +51,6 @@ public class MD5Util {
         return String.valueOf(cs);
     }
 
-    /**
-     * 验证加盐后是否和原密码一致
-     *
-     * @param password 原密码
-     *
-     * @param password 加密之后的密码
-     *
-     *@return boolean true表示和原密码一致   false表示和原密码不一致
-     */
     public static boolean getSaltverifyMD5(String password, String md5str) {
         char[] cs1 = new char[32];
         char[] cs2 = new char[16];
@@ -102,12 +64,10 @@ public class MD5Util {
     }
 
     public static void main(String[] args) {
-        // 原密码
         String plaintext = "123456";
 
-        // 获取加盐后的MD5值
         String ciphertext = MD5Util.getSaltMD5(plaintext);
-        System.out.println("加盐后MD5：" + ciphertext);
+        System.out.println("MD5：" + ciphertext);
         System.out.println("是否是同一字符串:" + MD5Util.getSaltverifyMD5("123456", ciphertext));
     }
 }

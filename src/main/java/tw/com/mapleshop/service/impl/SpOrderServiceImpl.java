@@ -18,14 +18,6 @@ import tw.com.mapleshop.vo.SpOrderVO;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <p>
- * 訂單表 服务实现类
- * </p>
- *
- * @author JHuang
- * @since 2022-01-24
- */
 @Service
 public class SpOrderServiceImpl extends ServiceImpl<SpOrderMapper, SpOrder> implements SpOrderService {
 

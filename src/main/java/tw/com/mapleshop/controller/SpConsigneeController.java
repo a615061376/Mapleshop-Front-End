@@ -1,10 +1,8 @@
 package tw.com.mapleshop.controller;
 
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,21 +16,10 @@ import tw.com.mapleshop.result.ResponseEnum;
 import tw.com.mapleshop.service.SpCartService;
 import tw.com.mapleshop.service.SpCategoryService;
 import tw.com.mapleshop.service.SpConsigneeService;
-import tw.com.mapleshop.utils.RegexValidateUtil;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.List;
 
-
-/**
- * <p>
- * 收貨人表 前端控制器
- * </p>
- *
- * @author JHuang
- * @since 2022-01-24
- */
 @Controller
 @RequestMapping("/spConsignee")
 @Slf4j

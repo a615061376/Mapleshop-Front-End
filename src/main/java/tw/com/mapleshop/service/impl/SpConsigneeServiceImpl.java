@@ -18,18 +18,9 @@ import org.springframework.stereotype.Service;
 import tw.com.mapleshop.utils.RegexValidateUtil;
 import tw.com.mapleshop.vo.SpConsigneeVO;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <p>
- * 收貨人表 服务实现类
- * </p>
- *
- * @author JHuang
- * @since 2022-01-24
- */
 @Service
 @Slf4j
 public class SpConsigneeServiceImpl extends ServiceImpl<SpConsigneeMapper, SpConsignee> implements SpConsigneeService {

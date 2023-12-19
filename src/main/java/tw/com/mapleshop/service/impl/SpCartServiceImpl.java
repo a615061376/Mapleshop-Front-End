@@ -21,14 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * <p>
- *  服务实现类
- * </p>
- *
- * @author JHuang
- * @since 2022-02-20
- */
 @Service
 @Slf4j
 public class SpCartServiceImpl extends ServiceImpl<SpCartMapper, SpCart> implements SpCartService {

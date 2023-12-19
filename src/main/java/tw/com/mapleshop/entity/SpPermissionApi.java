@@ -6,22 +6,14 @@ import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-/**
- * <p>
- * 
- * </p>
- *
- * @author JHuang
- * @since 2022-01-24
- */
 @Data
   @EqualsAndHashCode(callSuper = false)
     public class SpPermissionApi implements Serializable {
 
     private static final long serialVersionUID=1L;
 
-      @TableId(value = "id", type = IdType.AUTO)
-      private Integer id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
     private Integer psId;
 

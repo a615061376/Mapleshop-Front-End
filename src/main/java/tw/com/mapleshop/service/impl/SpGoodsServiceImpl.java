@@ -10,14 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * <p>
- * 商品表 服务实现类
- * </p>
- *
- * @author JHuang
- * @since 2022-01-24
- */
 @Service
 public class SpGoodsServiceImpl extends ServiceImpl<SpGoodsMapper, SpGoods> implements SpGoodsService {
 

@@ -1,6 +1,5 @@
 package tw.com.mapleshop.controller;
 
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,14 +17,6 @@ import tw.com.mapleshop.service.SpCategoryService;
 
 import javax.servlet.http.HttpSession;
 
-/**
- * <p>
- *  前端控制器
- * </p>
- *
- * @author JHuang
- * @since 2022-02-20
- */
 @Controller
 @RequestMapping("/spCart")
 @Slf4j

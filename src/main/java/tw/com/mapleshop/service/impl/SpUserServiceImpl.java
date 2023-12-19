@@ -16,14 +16,6 @@ import org.springframework.stereotype.Service;
 import tw.com.mapleshop.utils.MD5Util;
 import tw.com.mapleshop.utils.RegexValidateUtil;
 
-/**
- * <p>
- * 會員表 服务实现类
- * </p>
- *
- * @author JHuang
- * @since 2022-01-24
- */
 @Service
 @Slf4j
 public class SpUserServiceImpl extends ServiceImpl<SpUserMapper, SpUser> implements SpUserService {
